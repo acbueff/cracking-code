@@ -1,0 +1,45 @@
+package recursionDynamicProg;
+/**
+ * A magic index in an array A[0...N-1] is defined to be an index such that A[i] = i.
+ * Given a sorted array of distinct integers, write a method to find a magic index, if one exists,
+ * in array A....Followup: what if values are not distint?
+ * @author Andreas
+ *
+ */
+public class MySolution9_3 {
+	
+	public static int magicIndex(int[] A){
+		int size = A.length -1;
+		return magicIndex(A,0,size);
+	}
+
+	public static int magicIndex(int[] A, int start,int end){
+		int mid;
+		int foundL;
+		int foundR;
+		if(A[start] == start){return start;}
+		if(A[end] == end){return end;}
+		if(start >= end){return -1;}
+		
+		mid = ((end-start)/2)+start;
+		if(A[mid] == mid){return mid;}
+		foundL = magicIndex(A,start+1,mid-1);
+		foundR = magicIndex(A,mid+1,end-1);
+		if(foundL != -1){return foundL;}
+		else if(foundR != -1){return foundR;}
+		else{return -1;}
+	}
+	
+	public static void main(String[] args){
+		int x;
+		
+		
+		int[] arrayA = {10,9,8,7,6,5,3,2,1};
+		int[] arrayB = {10,9,8,7,6,5,4,3,2,1};
+		
+		x = magicIndex(arrayA);
+		int y = magicIndex(arrayB);
+		System.out.println("A: magic index is: " + x);
+		System.out.println("B: magic index is: " + y);
+	}
+}
