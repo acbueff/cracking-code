@@ -1,0 +1,50 @@
+package treeGraphs;
+
+import treeGraphs.MySolution4_4.Node;
+
+public class MySolution4_7 {
+	public static class Node{
+		int data;
+		Node left = null;
+		Node right =  null;
+		Node next = null;
+		public Node(int d){
+			data = d;
+		}
+		
+	}
+	
+	public boolean DFS(Node root,Node n){
+		
+		if(root == null){return false;}
+		if(root.data == n.data){return true;}
+		
+		if(DFS(root.left,n) || DFS(root.right, n)){
+			return true;
+		}
+		return false;
+	}
+	
+	public Node firstAncestor(Node r, Node a, Node b){
+		
+		if(DFS(r.left,a) && DFS(r.left,b)){//ancestor further down on left
+			return firstAncestor(r.left, a, b);
+		}
+		
+		if(DFS(r.right,a) && DFS(r.right,b)){//ancestor further down on right
+			return firstAncestor(r.right, a, b);
+		}
+		
+		//possibly at 
+		
+		
+		return r;
+	}
+	
+
+	public static void main(String[] args){
+		
+	}
+
+}
+
